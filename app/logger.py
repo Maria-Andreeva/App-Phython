@@ -94,9 +94,15 @@ def copy_data_to_file2():
     
     copy_element = sorted_data.get(var)
     
+    if copy_element == None:
+        print('Номер данных не существует в файле data_first_variant.csv\n')
+        return
+    
     with open('data_second_variant.csv', 'a', encoding='utf-8') as file:
 
             file.write(f'{index};{copy_element[1]};{copy_element[2]};{copy_element[3]};{copy_element[4]}\n\n')
+        
+        
 
 def copy_data_to_file1():
     var = int(input(f'\nВведите номер данных \n'))
@@ -107,6 +113,10 @@ def copy_data_to_file1():
     
     copy_element = sorted_data.get(var)
     
+    if copy_element == None:
+        print('Номер данных не существует в файле data_second_variant.csv\n')
+        return
+    
     with open('data_first_variant.csv', 'a', encoding='utf-8') as file:
 
             file.write( f'{index}\n'
@@ -115,11 +125,18 @@ def copy_data_to_file1():
                         f'{copy_element[0].split(';')[3]}\n'
                         f'{copy_element[0].split(';')[4]}\n\n')
     
+    
 
 def delete_data_from_file1():
     var = int(input(f'\nВведите номер данных \n'))
     
     sorted_data = get_sorted_data(1)
+    
+    delete_element = sorted_data.get(var)
+    
+    if delete_element == None:
+        print('Номер данных не существует в файле data_first_variant.csv\n')
+        return
 
     del sorted_data[var]
     
@@ -139,6 +156,12 @@ def delete_data_from_file2():
     
     sorted_data = get_sorted_data(2)
 
+    delete_element = sorted_data.get(var)
+    
+    if delete_element == None:
+        print('Номер данных не существует в файле data_second_variant.csv\n')
+        return
+    
     del sorted_data[var]
     
     os.remove('data_second_variant.csv')
@@ -151,9 +174,13 @@ def delete_data_from_file2():
 def change_data_from_file1():
     var = int(input(f'\nВведите номер данных \n'))
     
-    name, surname, phone, adress = input_user_data()
-    
     sorted_data = get_sorted_data(1)
+    
+    if sorted_data.get(var) == None:
+        print('Номер данных не существует в файле data_first_variant.csv\n')
+        return
+    
+    name, surname, phone, adress = input_user_data()
     
     element = sorted_data[var]
     
@@ -183,10 +210,14 @@ def change_data_from_file1():
 def change_data_from_file2():
     var = int(input(f'\nВведите номер данных \n'))
     
-    name, surname, phone, adress = input_user_data()
-    
     sorted_data = get_sorted_data(2)
     
+    if sorted_data.get(var) == None:
+        print('Номер данных не существует в файле data_second_variant.csv\n')
+        return
+      
+    name, surname, phone, adress = input_user_data()
+        
     element = str(sorted_data[var])
     
     new_data = str(var) + ";"
